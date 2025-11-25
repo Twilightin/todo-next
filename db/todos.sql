@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS todos;
+
 -- Create the todos table
 CREATE TABLE IF NOT EXISTS todos (
   id SERIAL PRIMARY KEY,
@@ -10,4 +12,4 @@ CREATE TABLE IF NOT EXISTS todos (
 INSERT INTO todos (text, completed) VALUES
   ('Morning excuses', false),
   ('Reading book', false),
-  ('Have lunch', false);
+  ('Have lunch', true);

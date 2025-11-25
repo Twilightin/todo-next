@@ -10,7 +10,7 @@ const initialTasks = [
   { id: 3, text: "Have lunch", completed: false },
 ];
 
-export default function DiyPage() {
+export default function App() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
 

@@ -3,6 +3,31 @@ import { useEffect } from "react"
 
 export async function GET(req) {
     const { searchParam } = new URL(req.url)
+    idParam = searchParam.get("id")
+
+    if (idParam) {
+        const result = await pool.query("SELECT * FROM todos WHERE id = $1", [idParam])
+        return NextResponse.json(result.rows[0])
+
+    const result = await pool.query("SELECT * FROM todos")
+    return NextResponse.json(result.rows)
+    }
+}
+
+async function fetchTodos() {
+    const response = await fetch("/api/todos")
+    const data = response.json()
+    setTasks(data)
+}
+
+useEffect (() => {
+    fetchTodos();
+}, [])
+
+// ===============================================================
+
+export async function GET(req) {
+    const { searchParam } = new URL(req.url)
     const idParam = searchParam.get("id")
 
     if (idParam) {

@@ -15,7 +15,7 @@ import { Button } from "../components/ui/button.js";
 // Import React hooks for managing state and side effects
 import { useState, useEffect } from "react";
 
-export default function DiyPage() {
+export default function App() {
   // ============================================
   // STATE MANAGEMENT (React Hooks)
   // ============================================
