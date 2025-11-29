@@ -63,6 +63,10 @@ const newTask = response.json()
 ↓
 const newTask = await response.json()
 
+await pool.query()
+await response.json()
+return NextResponse.json()
+
 // ==================================================================================
 
 -- 删除特定行
