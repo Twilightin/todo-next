@@ -1,11 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
 
-// const initialTasks = [
-//   { id: 1, text: "Morning excuses", completed: false },
-//   { id: 2, text: "Reading book", completed: false },
-//   { id: 3, text: "Have lunch", completed: true },
-// ];
+const initialTasks = [
+  { id: 1, text: "Morning excuses", completed: false },
+  { id: 2, text: "Reading book", completed: false },
+  { id: 3, text: "Have lunch", completed: true },
+];
 
 function TasksThread({ tasks, onDelete, onToggle }) {
   return (
@@ -52,18 +52,8 @@ function Form({ taskName, setTaskName, onSubmit }) {
 }
 
 export default function page() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(initialTasks);
   const [taskName, setTaskName] = useState("");
-
-  async function fetchTasks() {
-    const response = await fetch("/api/todos")
-    const data = await response.json()
-    setTasks(data)
-  }
-
-  useEffect(() => {
-    fetchTasks()
-  }, [])
 
   function handleDelete(id) {
     setTasks((prev) => prev.filter((t) => t.id !== id));

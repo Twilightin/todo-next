@@ -107,3 +107,30 @@ SET completed = false;
 
 
 ```
+
+export async function DELETE(req) {
+  const body = await req.json()
+  const {id} = body
+
+  const result = await pool.query("DELETE FROM todos WHERE id = $1 RETURNING *", [id])
+  return NextResponse.json(result.rows[0])
+}
+
+curl http://localhost:3000/api/todos
+curl "http://localhost:3000/api/todos?id=1"
+
+curl -X POST http://localhost:3000/api/todos \
+  -H "Content-Type: application/json" \
+  -d '{"text":"Learn Next.js"}'
+
+curl -X DELETE "http://localhost:3000/api/todos?id=1"
+
+curl -X DELETE http://localhost:3000/api/todos \
+  -H "Content-Type: application/json" \
+  -d '{"id":1}'
+
+curl -X PATCH "http://localhost:3000/api/todos?id=1"
+
+curl -X PATCH http://localhost:3000/api/todos \
+  -H "Content-Type: application/json" \
+  -d '{"id":3}'
