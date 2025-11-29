@@ -65,23 +65,43 @@ export default function page() {
     fetchTasks()
   }, [])
 
-  function handleDelete(id) {
+  async function handleDelete(id) {
+    const response = await fetch(`/api/todos?id=${id}`, {
+      method: "DELETE"
+    })
     setTasks((prev) => prev.filter((t) => t.id !== id));
   }
 
-  function handleToggle(id) {
+  async function handleToggle(id) {
+    const task = tasks.find((t) => t.id === id);
+
+    const response = await fetch("/api/todos", {
+      method: "PATCH",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({id, text: !task.completed})
+    })
+
     setTasks(prev => prev.map(t =>
       t.id === id ? {...t, completed: !t.completed} : t
     ))
   }
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    const newTask = {
-      id: Date.now(),
-      text: taskName,
-      completed: false,
-    };
+
+    // const newTask = {
+    //   id: Date.now(),
+    //   text: taskName,
+    //   completed: false,
+    // };
+    const response = await fetch("/api/todos", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({ text: taskName})
+    }
+    )
+
+    const newTask = await response.json()
     setTasks((prev) => [...prev, newTask]);
     setTaskName("");
   }
